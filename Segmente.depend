@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1543431655 source:c:\users\ana\desktop\segmente\main.cpp
+	<iostream>
+	<graphics.h>
+	<winbgim.h>
+	"customgraphics.h"
+
+1543431676 c:\users\ana\desktop\segmente\customgraphics.h
+
+1543431611 source:c:\users\ana\desktop\segmente\customgraphics.cpp
+	<graphics.h>
+	<winbgim.h>
+
