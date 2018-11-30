@@ -11,3 +11,15 @@
 	<graphics.h>
 	<winbgim.h>
 
+1543582208 source:c:\users\octav\desktop\segmente\segmente\main.cpp
+	<iostream>
+	<graphics.h>
+	<winbgim.h>
+	"customgraphics.h"
+
+1543582823 c:\users\octav\desktop\segmente\segmente\customgraphics.h
+
+1543582200 source:c:\users\octav\desktop\segmente\segmente\customgraphics.cpp
+	<graphics.h>
+	<winbgim.h>
+

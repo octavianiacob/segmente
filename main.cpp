@@ -3,11 +3,13 @@
 #include <winbgim.h>
 #include "customgraphics.h"
 
-struct point {
+struct point
+{
     int x,y;
 };
 
-struct segment {
+struct segment
+{
     point a,b;
 };
 
