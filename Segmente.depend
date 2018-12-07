@@ -28,7 +28,7 @@
 	<graphics.h>
 	<winbgim.h>
 
-1544204134 source:c:\users\alexa\documents\github\segmente\customgraphics.cpp
+1544213610 source:c:\users\alexa\documents\github\segmente\customgraphics.cpp
 	<graphics.h>
 	<winbgim.h>
 	<iostream>
@@ -36,9 +36,9 @@
 	"algorithms.h"
 	"customgraphics.h"
 
-1544204074 c:\users\alexa\documents\github\segmente\customgraphics.h
+1544212470 c:\users\alexa\documents\github\segmente\customgraphics.h
 
-1544207965 source:c:\users\alexa\documents\github\segmente\main.cpp
+1544212491 source:c:\users\alexa\documents\github\segmente\main.cpp
 	<iostream>
 	<graphics.h>
 	<winbgim.h>
@@ -49,5 +49,5 @@
 
 1544204304 source:c:\users\alexa\documents\github\segmente\algorithms.cpp
 
-1544204710 c:\users\alexa\documents\github\segmente\algorithms.h
+1544210980 c:\users\alexa\documents\github\segmente\algorithms.h
 

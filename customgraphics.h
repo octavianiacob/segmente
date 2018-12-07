@@ -16,10 +16,12 @@ void setBackgroundColor(int color);
 
 void drawMenu();
 
-void drawPoint(int x, int y, int radius=5, int color=WHITE);
+void drawDot(Point p, int color=WHITE);
 
-void drawSegment(int ax, int ay, int bx, int by, int thickness=1, int color=WHITE);
+void drawSegment(Point a, Point b, int thickness=1, int color=WHITE);
 
 bool isInsideButton(int x,int y,int buttonIndex);
+
+bool isInsideDot(Point p,Point c);
 
 #endif // CUSTOMGRAPHICS_H_INCLUDED

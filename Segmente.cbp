@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="algorithms.cpp" />
+		<Unit filename="algorithms.h" />
 		<Unit filename="customgraphics.cpp" />
 		<Unit filename="customgraphics.h" />
 		<Unit filename="main.cpp" />

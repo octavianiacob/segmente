@@ -4,6 +4,10 @@
 struct Point
 {
     int x,y;
+};
+
+struct SegmentEnd {
+    int x,y;
     int segmIndex;
 };
 
