@@ -3,18 +3,11 @@
 #include <winbgim.h>
 #include <stdlib.h>
 #include <time.h>
+#include "algorithms.h"
 #include "customgraphics.h"
 #define MAX 100
 
-struct Point
-{
-    int x,y;
-} points[MAX];
-
-struct Segment
-{
-    Point a,b;
-};
+Point points[MAX];
 
 int nPoints,nSegments;
 
@@ -27,8 +20,8 @@ void addPoints(int number) {
     int width=getwindowwidth();
     int height=getwindowheight();
     for(int i=1;i<=number;i++) {
-        int x=rand()%(width*4/5);
-        int y=rand()%height;
+        int x=rand()%(width*4/5-10)+10;
+        int y=rand()%(height-10)+10;
         points[nPoints++]={x,y};
         drawPoint(x,y);
     }
@@ -70,7 +63,6 @@ void startGame() {
     getch();
     closegraph();
 }
-
 
 int main()
 {

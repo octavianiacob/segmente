@@ -28,3 +28,26 @@
 	<graphics.h>
 	<winbgim.h>
 
+1544204134 source:c:\users\alexa\documents\github\segmente\customgraphics.cpp
+	<graphics.h>
+	<winbgim.h>
+	<iostream>
+	<math.h>
+	"algorithms.h"
+	"customgraphics.h"
+
+1544204074 c:\users\alexa\documents\github\segmente\customgraphics.h
+
+1544207965 source:c:\users\alexa\documents\github\segmente\main.cpp
+	<iostream>
+	<graphics.h>
+	<winbgim.h>
+	<stdlib.h>
+	<time.h>
+	"algorithms.h"
+	"customgraphics.h"
+
+1544204304 source:c:\users\alexa\documents\github\segmente\algorithms.cpp
+
+1544204710 c:\users\alexa\documents\github\segmente\algorithms.h
+

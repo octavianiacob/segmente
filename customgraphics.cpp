@@ -2,6 +2,7 @@
 #include <winbgim.h>
 #include <iostream>
 #include <math.h>
+#include "algorithms.h"
 #include "customgraphics.h"
 
 Button buttons[10];
@@ -47,10 +48,8 @@ void drawMenu() {
 
 void drawPoint(int x, int y, int radius, int color)
 {
-    setcolor(color);
-    circle(x,y,5);
     setfillstyle(SOLID_FILL, color);
-    floodfill(x,y,color);
+    fillellipse(x,y,radius,radius);
 }
 
 void drawSegment(int ax, int ay, int bx, int by, int thickness, int color)
