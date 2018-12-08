@@ -39,7 +39,7 @@ bool isValidSegment(Point a, Point b) {
 
 void showGameScreen() {
     drawGameArea();
-    //drawScoreboard();
+    drawScoreboard();
     addPoints(50);
     while(!isOver()) {
         if(ismouseclick(WM_LBUTTONDOWN)) {

@@ -51,3 +51,26 @@
 
 1544210980 c:\users\alexa\documents\github\segmente\algorithms.h
 
+1544293332 source:\\mac\home\documents\github\segmente\algorithms.cpp
+
+1544293451 source:\\mac\home\documents\github\segmente\main.cpp
+	<iostream>
+	<graphics.h>
+	<winbgim.h>
+	<stdlib.h>
+	<time.h>
+	"algorithms.h"
+	"customgraphics.h"
+
+1544293332 \\mac\home\documents\github\segmente\algorithms.h
+
+1544293332 \\mac\home\documents\github\segmente\customgraphics.h
+
+1544293474 source:\\mac\home\documents\github\segmente\customgraphics.cpp
+	<graphics.h>
+	<winbgim.h>
+	<iostream>
+	<math.h>
+	"algorithms.h"
+	"customgraphics.h"
+

@@ -8,6 +8,9 @@
 Button buttons[10];
 int dotRadius=5,nButtons;
 
+char player1[20]="Player1";
+char player2[20]="Player2";
+
 void setBackgroundColor(int color)
 {
     setfillstyle(SOLID_FILL, color);
@@ -34,6 +37,24 @@ void drawButton(char *text, int x1, int y1, int bgColor=RED, int textSize=16,int
     bar(x1,y1,x2,y2);
     drawText(text,x1,y1,WHITE,textSize,font);
     buttons[nButtons++]={x1,y1,x2,y2,text};
+}
+
+void drawScoreboard() {
+    setfillstyle(SOLID_FILL,COLOR(0,106,78));
+    bar(0.8*getwindowwidth(),0,getwindowwidth(),getwindowheight());
+    rectangle(0.8*getwindowwidth()+3,3,getwindowwidth()-10,getwindowheight()-32);
+    int exitX=getwindowwidth()-140;
+    int exitY=getwindowheight()-70;
+    int scoreX=exitX-10;
+    int scoreY=exitY-450;
+    int player1X=scoreX-20;
+    int player1Y=scoreY+150;
+    int player2X=scoreX-20;
+    int player2Y=scoreY+300;
+    drawButton("Exit",exitX,exitY,BLUE,15,COMPLEX_FONT);
+    drawText("Score",scoreX,scoreY,WHITE,15);
+    drawText(player1,player1X,player1Y,BLUE,15);
+    drawText(player2,player2X,player2Y,RED,15);
 }
 
 void drawMenu() {
