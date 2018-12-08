@@ -71,10 +71,23 @@ void showStartScreen() {
     } while(true);
 }
 
+void showOptionsScreen() {
+    drawOptions();
+    do {
+        if(ismouseclick(WM_LBUTTONDOWN)) {
+            int x,y;
+            getmouseclick(WM_LBUTTONDOWN,x,y);
+            std::cout<<x<<" "<<y<<" ";
+            if(isInsideButton(x,y,1))
+                showGameScreen();
+        }
+    } while(true);
+}
+
 void startGame() {
     initwindow(960,540);
     showStartScreen();
-    //showOptionsScreen();
+    showOptionsScreen();
     showGameScreen();
     getch();
     closegraph();

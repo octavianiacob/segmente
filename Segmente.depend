@@ -53,7 +53,7 @@
 
 1544293332 source:\\mac\home\documents\github\segmente\algorithms.cpp
 
-1544293451 source:\\mac\home\documents\github\segmente\main.cpp
+1544301596 source:\\mac\home\documents\github\segmente\main.cpp
 	<iostream>
 	<graphics.h>
 	<winbgim.h>
@@ -64,9 +64,9 @@
 
 1544293332 \\mac\home\documents\github\segmente\algorithms.h
 
-1544293332 \\mac\home\documents\github\segmente\customgraphics.h
+1544297153 \\mac\home\documents\github\segmente\customgraphics.h
 
-1544293474 source:\\mac\home\documents\github\segmente\customgraphics.cpp
+1544298792 source:\\mac\home\documents\github\segmente\customgraphics.cpp
 	<graphics.h>
 	<winbgim.h>
 	<iostream>

@@ -16,6 +16,8 @@ void setBackgroundColor(int color);
 
 void drawMenu();
 
+void drawOptions();
+
 void drawDot(Point p, int color=WHITE);
 
 void drawSegment(Point a, Point b, int thickness=1, int color=WHITE);

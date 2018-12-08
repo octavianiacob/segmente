@@ -40,9 +40,8 @@ void drawButton(char *text, int x1, int y1, int bgColor=RED, int textSize=16,int
 }
 
 void drawScoreboard() {
-    setfillstyle(SOLID_FILL,COLOR(0,106,78));
+    setfillstyle(SOLID_FILL,MAGENTA);
     bar(0.8*getwindowwidth(),0,getwindowwidth(),getwindowheight());
-    rectangle(0.8*getwindowwidth()+3,3,getwindowwidth()-10,getwindowheight()-32);
     int exitX=getwindowwidth()-140;
     int exitY=getwindowheight()-70;
     int scoreX=exitX-10;
@@ -51,10 +50,10 @@ void drawScoreboard() {
     int player1Y=scoreY+150;
     int player2X=scoreX-20;
     int player2Y=scoreY+300;
-    drawButton("Exit",exitX,exitY,BLUE,15,COMPLEX_FONT);
+    drawButton("Exit",exitX,exitY,BLUE,15,COMPLEX_FONT); //nButton 11
     drawText("Score",scoreX,scoreY,WHITE,15);
     drawText(player1,player1X,player1Y,BLUE,15);
-    drawText(player2,player2X,player2Y,RED,15);
+    drawText(player2,player2X,player2Y,GREEN,15);
 }
 
 void drawMenu() {
@@ -65,6 +64,29 @@ void drawMenu() {
     int buttonX=getwindowwidth()/2-80;
     int buttonY=getwindowheight()/2;
     drawButton("Start",buttonX,buttonY,BLUE);
+}
+
+void drawOptions() {
+    setBackgroundColor(MAGENTA);
+    int titleX=getwindowwidth()/2-200;
+    int titleY=getwindowheight()/2-120;
+    drawText("Options",25,25,WHITE,5);
+    line(0,70,getwindowwidth(),70);
+    drawButton("Play",430,470,BLUE,15,COMPLEX_FONT); //nButton 1
+    drawText("Game Mode:",25,100,WHITE,4);
+    drawButton("Player vs Player",270,105,BLUE,3); //nButton 2
+    drawButton("Player vs Computer",570,105,BLUE,3); //nButton 3
+    drawText("Best of:",25,170,WHITE,4);
+    drawButton("3",270,170,BLUE,3); //nButton 4
+    drawButton("5",370,170,BLUE,3); //nButton 5
+    drawButton("7",470,170,BLUE,3); //nButton 6
+    drawText("Player1 Color:",25,240,WHITE,4);
+    drawButton("Select",340,245,BLUE,3); //nButton 7
+    drawText("Player2 Color:",525,240,WHITE,4);
+    drawButton("Select",840,245,BLUE,3); //nButton 8
+    drawText("Timer:",25,310,WHITE,4);
+    drawButton("Yes",180,315,BLUE,3); //nButton 9
+    drawButton("No",250,315,BLUE,3); //nButton 10
 }
 
 void drawDot(Point p, int color)
