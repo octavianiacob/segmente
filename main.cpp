@@ -9,7 +9,7 @@
 
 Point points[MAX];
 
-int nPoints,nSegments;
+int nPoints,nSegments,turn=BLUE;
 
 bool isOver() {
     return false;
@@ -51,9 +51,13 @@ void showGameScreen() {
                     getmouseclick(WM_LBUTTONDOWN,x,y);
                     p2=getPointIndex({x,y});
                     if(p2>=0&&isValidSegment(points[p1],points[p2]))
-                        drawSegment(points[p1],points[p2]);
+                        drawSegment(points[p1],points[p2],turn);
                 } while(p2<0);
             }
+            if(turn==BLUE)
+                turn=GREEN;
+            else
+                turn=BLUE;
         }
     }
 }
@@ -64,7 +68,6 @@ void showStartScreen() {
         if(ismouseclick(WM_LBUTTONDOWN)) {
             int x,y;
             getmouseclick(WM_LBUTTONDOWN,x,y);
-            std::cout<<x<<" "<<y<<" ";
             if(isInsideButton(x,y,0))
                 break;
         }

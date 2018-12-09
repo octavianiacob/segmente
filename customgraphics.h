@@ -20,7 +20,7 @@ void drawOptions();
 
 void drawDot(Point p, int color=WHITE);
 
-void drawSegment(Point a, Point b, int thickness=1, int color=WHITE);
+void drawSegment(Point a, Point b,int color=WHITE, int thickness=1);
 
 bool isInsideButton(int x,int y,int buttonIndex);
 

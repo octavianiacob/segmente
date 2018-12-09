@@ -95,7 +95,7 @@ void drawDot(Point p, int color)
     fillellipse(p.x,p.y,dotRadius,dotRadius);
 }
 
-void drawSegment(Point a, Point b, int thickness, int color)
+void drawSegment(Point a, Point b, int color,int thickness)
 {
     setcolor(color);
     for(int i=1;i<=thickness;i++)

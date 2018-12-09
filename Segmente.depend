@@ -1,19 +1,21 @@
 # depslib dependency file v1.0
-1544015391 source:c:\users\ana\desktop\segmente\main.cpp
+1544363282 source:c:\users\ana\desktop\segmente\main.cpp
 	<iostream>
 	<graphics.h>
 	<winbgim.h>
 	<stdlib.h>
 	<time.h>
+	"algorithms.h"
 	"customgraphics.h"
 
-1544015351 c:\users\ana\desktop\segmente\customgraphics.h
+1544363241 c:\users\ana\desktop\segmente\customgraphics.h
 
-1544015365 source:c:\users\ana\desktop\segmente\customgraphics.cpp
+1544363220 source:c:\users\ana\desktop\segmente\customgraphics.cpp
 	<graphics.h>
 	<winbgim.h>
 	<iostream>
 	<math.h>
+	"algorithms.h"
 	"customgraphics.h"
 
 1543582208 source:c:\users\octav\desktop\segmente\segmente\main.cpp
@@ -73,4 +75,8 @@
 	<math.h>
 	"algorithms.h"
 	"customgraphics.h"
+
+1544362901 source:c:\users\ana\desktop\segmente\algorithms.cpp
+
+1544363780 c:\users\ana\desktop\segmente\algorithms.h
 
