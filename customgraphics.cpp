@@ -30,12 +30,12 @@ void drawText(char *text, int x, int y, int color=BLACK, int textSize=12,int fon
     outtextxy(x, y, text);
 }
 
-void drawButton(char *text, int x1, int y1, int bgColor=RED, int textSize=16,int font=COMPLEX_FONT) {
-    int x2=x1+1.7*textSize*strlen(text);
-    int y2=y1+2.7*textSize;
+void drawButton(char *text, int x1, int y1, int x2, int y2, int bgColor=RED, int textSize=16,int font=COMPLEX_FONT) {
     setfillstyle(SOLID_FILL, bgColor);
     bar(x1,y1,x2,y2);
     drawText(text,x1,y1,WHITE,textSize,font);
+    setcolor(WHITE);
+    rectangle(x1,y1,x2,y2);
     buttons[nButtons++]={x1,y1,x2,y2,text};
 }
 
@@ -50,24 +50,25 @@ void drawScoreboard() {
     int player1Y=scoreY+150;
     int player2X=scoreX-20;
     int player2Y=scoreY+300;
-    drawButton("Exit",exitX,exitY,BLUE,15,COMPLEX_FONT); //nButton 11
+    //drawButton("Exit",exitX,exitY,BLUE,15,COMPLEX_FONT); //nButton 11
     drawText("Score",scoreX,scoreY,WHITE,15);
     drawText(player1,player1X,player1Y,BLUE,15);
     drawText(player2,player2X,player2Y,GREEN,15);
 }
 
 void drawMenu() {
-    setBackgroundColor(MAGENTA);
+    readimagefile("bg.bmp",0,0,getwindowwidth(),getwindowheight());
     int titleX=getwindowwidth()/2-200;
     int titleY=getwindowheight()/2-120;
     drawText("SEGMENTE",titleX,titleY,WHITE,30);
+    rectangle(titleX,titleY,titleX+400,titleY+80);
     int buttonX=getwindowwidth()/2-80;
     int buttonY=getwindowheight()/2;
-    drawButton("Start",buttonX,buttonY,BLUE);
+    drawButton("Start",buttonX,buttonY,buttonX+130,buttonY+40,getpixel(buttonX,buttonY));
 }
 
 void drawOptions() {
-    setBackgroundColor(MAGENTA);
+    /*setBackgroundColor(MAGENTA);
     int titleX=getwindowwidth()/2-200;
     int titleY=getwindowheight()/2-120;
     drawText("Options",25,25,WHITE,5);
@@ -86,13 +87,16 @@ void drawOptions() {
     drawButton("Select",840,245,BLUE,3); //nButton 8
     drawText("Timer:",25,310,WHITE,4);
     drawButton("Yes",180,315,BLUE,3); //nButton 9
-    drawButton("No",250,315,BLUE,3); //nButton 10
+    drawButton("No",250,315,BLUE,3); //nButton 10*/
 }
 
 void drawDot(Point p, int color)
 {
+    setcolor(WHITE);
+    circle(p.x,p.y,dotRadius);
     setfillstyle(SOLID_FILL, color);
-    fillellipse(p.x,p.y,dotRadius,dotRadius);
+    //fillellipse(p.x,p.y,dotRadius,dotRadius);
+    floodfill(p.x,p.y,WHITE);
 }
 
 void drawSegment(Point a, Point b, int color,int thickness)

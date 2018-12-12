@@ -9,7 +9,7 @@
 
 Point points[MAX];
 
-int nPoints,nSegments,turn=BLUE;
+int nPoints,nSegments,turn=RED;
 Segment seg[MAX];
 
 bool isOver() {
@@ -36,15 +36,8 @@ int getPointIndex(Point p) {
 
 bool isValidSegment(Segment s) {
     for(int i=0;i<nSegments;i++)
-    {
         if(doIntersect(s, seg[i]))
             return false;
-    }
-    for(int i=0;i<nPoints;i++)
-    {
-        if(isCollinear(s.a,s.b,points[i]))
-            return false;
-    }
     return true;
 }
 
@@ -74,6 +67,7 @@ bool isGameOver()
 }
 
 void showGameScreen() {
+    clearviewport();
     drawGameArea();
     drawScoreboard();
     addPoints(50);
@@ -86,18 +80,16 @@ void showGameScreen() {
                 do {
                     getmouseclick(WM_LBUTTONDOWN,x,y);
                     p2=getPointIndex({x,y});
-                    if(p2>=0&&isValidSegment({points[p1],points[p2]}))
-                        {
-                            drawSegment(points[p1],points[p2],turn);
-                            addSegmentToArray(p1,p2);
-                                std::cout<<p1<<' '<<p2<<' ';
-                        }
+                    if(p2>=0&&isValidSegment({points[p1],points[p2]})){
+                        drawSegment(points[p1],points[p2],turn);
+                        addSegmentToArray(p1,p2);
+                    }
                 } while(p2<0);
             }
             if(turn==RED)
                 turn=YELLOW;
             else
-                turn=BLUE;
+                turn=RED;
         }
     }
 }
@@ -120,17 +112,17 @@ void showOptionsScreen() {
         if(ismouseclick(WM_LBUTTONDOWN)) {
             int x,y;
             getmouseclick(WM_LBUTTONDOWN,x,y);
-            std::cout<<x<<" "<<y<<" "<<" npoints:"<<nPoints;
             if(isInsideButton(x,y,1))
-                showGameScreen();
+                break;
         }
     } while(true);
+    showGameScreen();
 }
 
 void startGame() {
     initwindow(960,540);
     showStartScreen();
-    showOptionsScreen();
+    //showOptionsScreen();
     showGameScreen();
     getch();
     closegraph();
