@@ -40,3 +40,8 @@ bool doIntersect(Segment s1, Segment s2)
         return true;
     return false;
 }
+
+bool isCollinear(Point a, Point b, Point c)
+{
+    return(a.x*b.y+b.x*c.y+c.x*a.y-c.x*b.y-a.x*c.y-b.x*a.y==0);
+}

@@ -53,9 +53,11 @@
 
 1544210980 c:\users\alexa\documents\github\segmente\algorithms.h
 
-1544293332 source:\\mac\home\documents\github\segmente\algorithms.cpp
+1544605301 source:\\mac\home\documents\github\segmente\algorithms.cpp
+	"algorithms.h"
+	<iostream>
 
-1544301596 source:\\mac\home\documents\github\segmente\main.cpp
+1544607033 source:\\mac\home\documents\github\segmente\main.cpp
 	<iostream>
 	<graphics.h>
 	<winbgim.h>
@@ -64,11 +66,11 @@
 	"algorithms.h"
 	"customgraphics.h"
 
-1544293332 \\mac\home\documents\github\segmente\algorithms.h
+1544605293 \\mac\home\documents\github\segmente\algorithms.h
 
-1544297153 \\mac\home\documents\github\segmente\customgraphics.h
+1544601241 \\mac\home\documents\github\segmente\customgraphics.h
 
-1544298792 source:\\mac\home\documents\github\segmente\customgraphics.cpp
+1544607069 source:\\mac\home\documents\github\segmente\customgraphics.cpp
 	<graphics.h>
 	<winbgim.h>
 	<iostream>

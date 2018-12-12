@@ -10,6 +10,7 @@
 Point points[MAX];
 
 int nPoints,nSegments,turn=BLUE;
+Segment seg[MAX];
 
 bool isOver() {
     return false;
@@ -33,7 +34,42 @@ int getPointIndex(Point p) {
     return -1;
 }
 
-bool isValidSegment(Point a, Point b) {
+bool isValidSegment(Segment s) {
+    for(int i=0;i<nSegments;i++)
+    {
+        if(doIntersect(s, seg[i]))
+            return false;
+    }
+    for(int i=0;i<nPoints;i++)
+    {
+        if(isCollinear(s.a,s.b,points[i]))
+            return false;
+    }
+    return true;
+}
+
+void addSegmentToArray(int index1, int index2) {
+    Segment s = {points[index1], points[index2]};
+    seg[nSegments++]=s;
+    //swap(points[index1],points[nPoints-1]);
+    Point aux = points[index1];
+    points[index1]=points[nPoints-1];
+    points[nPoints-1]=aux;
+    //swap(points[index2],points[nPoints-2]);
+    aux = points[index2];
+    points[index2]=points[nPoints-2];
+    points[nPoints-2]=aux;
+    nPoints-=2;
+}
+
+bool isGameOver()
+{
+    for(int i=0;i<nPoints;i++)
+        for(int j=0;j<nPoints;j++)
+    {
+        if(!isValidSegment({points[i], points[j]}))
+            return false;
+    }
     return true;
 }
 
@@ -50,12 +86,16 @@ void showGameScreen() {
                 do {
                     getmouseclick(WM_LBUTTONDOWN,x,y);
                     p2=getPointIndex({x,y});
-                    if(p2>=0&&isValidSegment(points[p1],points[p2]))
-                        drawSegment(points[p1],points[p2],turn);
+                    if(p2>=0&&isValidSegment({points[p1],points[p2]}))
+                        {
+                            drawSegment(points[p1],points[p2],turn);
+                            addSegmentToArray(p1,p2);
+                                std::cout<<p1<<' '<<p2<<' ';
+                        }
                 } while(p2<0);
             }
-            if(turn==BLUE)
-                turn=GREEN;
+            if(turn==RED)
+                turn=YELLOW;
             else
                 turn=BLUE;
         }
@@ -80,7 +120,7 @@ void showOptionsScreen() {
         if(ismouseclick(WM_LBUTTONDOWN)) {
             int x,y;
             getmouseclick(WM_LBUTTONDOWN,x,y);
-            std::cout<<x<<" "<<y<<" ";
+            std::cout<<x<<" "<<y<<" "<<" npoints:"<<nPoints;
             if(isInsideButton(x,y,1))
                 showGameScreen();
         }
@@ -99,6 +139,7 @@ void startGame() {
 int main()
 {
     startGame();
+
     return 0;
 }
 

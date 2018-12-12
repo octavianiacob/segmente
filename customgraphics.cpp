@@ -108,7 +108,6 @@ void drawSegment(Point a, Point b, int color,int thickness)
 
 bool isInsideButton(int x,int y,int buttonIndex) {
     Button button=buttons[buttonIndex];
-    std::cout<<buttons[0].x1<<" "<<buttons[0].y1<<" "<<buttons[0].x2<<" "<<buttons[0].y2<<'\n';
     return x>=button.x1&&x<=button.x2&&y>=button.y1&&y<=button.y2;
 }
 
