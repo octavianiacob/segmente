@@ -88,7 +88,7 @@
 
 1544637187 c:\users\ana\documents\github\segmente\algorithms.h
 
-1544708561 source:c:\users\ana\documents\github\segmente\customgraphics.cpp
+1546115047 source:c:\users\ana\documents\github\segmente\customgraphics.cpp
 	<graphics.h>
 	<winbgim.h>
 	<iostream>
@@ -96,9 +96,9 @@
 	"algorithms.h"
 	"customgraphics.h"
 
-1544649973 c:\users\ana\documents\github\segmente\customgraphics.h
+1546104674 c:\users\ana\documents\github\segmente\customgraphics.h
 
-1546031782 source:c:\users\ana\documents\github\segmente\main.cpp
+1546114972 source:c:\users\ana\documents\github\segmente\main.cpp
 	<iostream>
 	<graphics.h>
 	<winbgim.h>

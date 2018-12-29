@@ -7,7 +7,7 @@
 #include "algorithms.h"
 #include "customgraphics.h"
 #define MAX_POINTS 100
-#define PLAYER1 RED
+#define PLAYER1 RGB(0,255,255)
 #define PLAYER2 YELLOW
 Point points[MAX_POINTS];
 
@@ -32,13 +32,14 @@ bool isValidSegment(Segment s) {
 
 bool isGameOver() {
     for(int i=0;i<nPoints;i++)
-    for(int j=0;j<nPoints;j++)
-        if(!isValidSegment({points[i], points[j]}))
+    for(int j=i+1;j<nPoints;j++)
+        if(points[i].x&&points[j].x&&isValidSegment({points[i], points[j]}))
             return false;
     return true;
 }
 
 void addPoints() {
+    nPoints=0,nSegments=0;
     srand(time(NULL));
     int width=getwindowwidth();
     int height=getwindowheight();
@@ -130,6 +131,8 @@ void doComputerMove() {
                 point1Index=i,point2Index=j;
     }
     drawSegment(points[point1Index],points[point2Index],PLAYER2);
+    drawDot(points[point1Index],PLAYER2);
+    drawDot(points[point2Index],PLAYER2);
     addSegmentToArray(point1Index,point2Index);
 }
 
@@ -140,11 +143,18 @@ void doPlayerMove() {
         p1=getPointIndex({x,y});
         if(p1<0)
             continue;
+        drawDot(points[p1],turn);
         do {
             getmouseclick(WM_LBUTTONDOWN,x,y);
             p2=getPointIndex({x,y});
+            if(p2==p1) {
+                drawDot(points[p1]);
+                p1=-1;
+                break;
+            }
             if(p2>=0&&isValidSegment({points[p1],points[p2]})){
                 drawSegment(points[p1],points[p2],turn);
+                drawDot(points[p2],turn);
                 addSegmentToArray(p1,p2);
             }
             else
@@ -153,21 +163,41 @@ void doPlayerMove() {
     } while(p1<0);
 }
 
+void updateScores() {
+    char score1[2], score2[2];
+    itoa(player1Score,score1,10);
+    itoa(player2Score,score2,10);
+    setfillstyle(SOLID_FILL,RGB(250,250,250));
+    drawText(score1,850,250,BLACK,12,GOTHIC_FONT);
+    drawText(score2,850,400,BLACK,12,GOTHIC_FONT);
+}
+
+void playLevel() {
+    drawGameArea();
+    addPoints();
+    turn=PLAYER1;
+    while(!isGameOver()) {
+        if(gameMode==PvC&&turn==PLAYER2)
+            doComputerMove();
+        else
+            doPlayerMove();
+        if(turn==PLAYER1)
+            turn=PLAYER2;
+        else
+            turn=PLAYER1;
+    }
+    if(turn==PLAYER1)
+        player2Score++;
+    else
+        player1Score++;
+}
+
 void showGameScreen() {
     clearviewport();
-    drawGameArea();
     drawScoreboard();
-    addPoints();
-    while(!isGameOver()) {
-        doPlayerMove();
-        if(gameMode==PvC&&!isGameOver())
-            doComputerMove();
-        else {
-            if(turn==PLAYER1)
-                turn=PLAYER2;
-            else
-                turn=PLAYER1;
-        }
+    for(int i=1;i<=3;i++) {
+        updateScores();
+        playLevel();
     }
 }
 
