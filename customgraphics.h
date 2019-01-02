@@ -8,6 +8,8 @@ struct Button {
 
 void drawButton(char *text, int x1, int y1, int x2, int y2, int bgColor, int textSize,int font);
 
+void changeButtonText(int buttonIndex, char text[20]);
+
 void drawGameArea();
 
 void drawScoreboard();

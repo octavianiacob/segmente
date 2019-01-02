@@ -39,6 +39,11 @@ void drawButton(char *text, int x1, int y1, int x2, int y2, int bgColor=RED, int
     buttons[nButtons++]={x1,y1,x2,y2,text};
 }
 
+void changeButtonText(int buttonIndex, char text[20])
+{
+    buttons[buttonIndex].name=text;
+}
+
 void drawScoreboard() {
     setfillstyle(SOLID_FILL,RGB(250,250,250));
     bar(0.8*getwindowwidth(),0,getwindowwidth(),getwindowheight());
@@ -68,26 +73,22 @@ void drawMenu() {
 }
 
 void drawOptions() {
-    /*setBackgroundColor(MAGENTA);
-    int titleX=getwindowwidth()/2-200;
-    int titleY=getwindowheight()/2-120;
-    drawText("Options",25,25,WHITE,5);
-    line(0,70,getwindowwidth(),70);
-    drawButton("Play",430,470,BLUE,15,COMPLEX_FONT); //nButton 1
-    drawText("Game Mode:",25,100,WHITE,4);
-    drawButton("Player vs Player",270,105,BLUE,3); //nButton 2
-    drawButton("Player vs Computer",570,105,BLUE,3); //nButton 3
-    drawText("Best of:",25,170,WHITE,4);
-    drawButton("3",270,170,BLUE,3); //nButton 4
-    drawButton("5",370,170,BLUE,3); //nButton 5
-    drawButton("7",470,170,BLUE,3); //nButton 6
-    drawText("Player1 Color:",25,240,WHITE,4);
-    drawButton("Select",340,245,BLUE,3); //nButton 7
-    drawText("Player2 Color:",525,240,WHITE,4);
-    drawButton("Select",840,245,BLUE,3); //nButton 8
-    drawText("Timer:",25,310,WHITE,4);
-    drawButton("Yes",180,315,BLUE,3); //nButton 9
-    drawButton("No",250,315,BLUE,3); //nButton 10*/
+    //readimagefile("bg.bmp",0,0,getwindowwidth(),getwindowheight());
+    setBackgroundColor(RGB(3,36,80));
+    int titleX=getwindowwidth()/2-150;
+    int titleY=40;
+    drawText("OPTIONS",titleX,titleY,WHITE,28);
+    rectangle(titleX,titleY,titleX+310,titleY+50);
+    drawText("Game mode:",100,130,WHITE,16);
+    drawText("Timer:",100,190,WHITE,16);
+    drawText("Colored Points:",100,250,WHITE,16);
+    drawText("Music:",100,310,WHITE,16);
+    drawButton("Play",430,450,540,490,getpixel(430,450)); //nButton1
+    drawButton("PvC",700,130,780,170,getpixel(1,1));
+    drawButton("NO",700,190,780,230,getpixel(1,1));
+    drawButton("NO",700,250,780,290,getpixel(1,1));
+    drawButton("NO",700,310,780,350,getpixel(1,1));
+    std::cout<<"Number of buttons: "<<nButtons<<'\n';
 }
 
 void drawDot(Point p, int color)
