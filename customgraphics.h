@@ -6,7 +6,7 @@ struct Button {
     char *name;
 };
 
-void drawButton(char *text, int x1, int y1, int x2, int y2, int bgColor, int textSize,int font);
+void drawButton(int buttonIndex, int bgColor=RGB(3,36,80), int textSize=16,int font=COMPLEX_FONT);
 
 void changeButtonText(int buttonIndex, char text[20]);
 

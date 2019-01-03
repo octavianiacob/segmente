@@ -256,14 +256,23 @@ void showGameScreen()
 void showStartScreen()
 {
     drawMenu();
+    bool hovered=false;
     do
     {
+        int x,y;
         if(ismouseclick(WM_LBUTTONDOWN))
         {
-            int x,y;
             getmouseclick(WM_LBUTTONDOWN,x,y);
             if(isInsideButton(x,y,0))
                 break;
+        }
+        if(ismouseclick(WM_MOUSEMOVE)) {
+            getmouseclick(WM_MOUSEMOVE,x,y);
+            if(isInsideButton(x,y,0)) {
+                drawButton(0,RED),hovered=true;
+            }
+            else if(hovered)
+                drawButton(0),hovered=false;
         }
     }
     while(true);
@@ -353,7 +362,7 @@ void startGame()
 {
     initwindow(960,540);
     showStartScreen();
-    showOptionsScreen();
+    //showOptionsScreen();
     showGameScreen();
     getch();
     closegraph();

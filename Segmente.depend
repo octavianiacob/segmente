@@ -83,13 +83,13 @@
 
 1544363780 c:\users\ana\desktop\segmente\algorithms.h
 
-1544639434 source:c:\users\ana\documents\github\segmente\algorithms.cpp
+1546517747 source:c:\users\ana\documents\github\segmente\algorithms.cpp
 	"algorithms.h"
 	<iostream>
 
-1544637187 c:\users\ana\documents\github\segmente\algorithms.h
+1546517747 c:\users\ana\documents\github\segmente\algorithms.h
 
-1546115047 source:c:\users\ana\documents\github\segmente\customgraphics.cpp
+1546520612 source:c:\users\ana\documents\github\segmente\customgraphics.cpp
 	<graphics.h>
 	<winbgim.h>
 	<iostream>
@@ -97,9 +97,9 @@
 	"algorithms.h"
 	"customgraphics.h"
 
-1546104674 c:\users\ana\documents\github\segmente\customgraphics.h
+1546518537 c:\users\ana\documents\github\segmente\customgraphics.h
 
-1546114972 source:c:\users\ana\documents\github\segmente\main.cpp
+1546521055 source:c:\users\ana\documents\github\segmente\main.cpp
 	<iostream>
 	<graphics.h>
 	<winbgim.h>

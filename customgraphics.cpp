@@ -25,18 +25,18 @@ void drawGameArea() {
 void drawText(char *text, int x, int y, int color=BLACK, int textSize=12,int font=GOTHIC_FONT)
 {
     setcolor(color);
-    setbkcolor(getpixel(x, y));
+    setbkcolor(getpixel(x+1, y+1));
     settextstyle(font,HORIZ_DIR,textSize);
     outtextxy(x, y, text);
 }
 
-void drawButton(char *text, int x1, int y1, int x2, int y2, int bgColor=RED, int textSize=16,int font=COMPLEX_FONT) {
+void drawButton(int buttonIndex, int bgColor, int textSize,int font) {
+    Button button=buttons[buttonIndex];
     setfillstyle(SOLID_FILL, bgColor);
-    bar(x1,y1,x2,y2);
-    drawText(text,x1,y1,WHITE,textSize,font);
+    bar(button.x1,button.y1,button.x2,button.y2);
+    drawText(button.name,button.x1,button.y1,WHITE,textSize,font);
     setcolor(WHITE);
-    rectangle(x1,y1,x2,y2);
-    buttons[nButtons++]={x1,y1,x2,y2,text};
+    rectangle(button.x1,button.y1,button.x2,button.y2);
 }
 
 void changeButtonText(int buttonIndex, char text[20])
@@ -69,12 +69,14 @@ void drawMenu() {
     rectangle(titleX,titleY,titleX+390,titleY+50);
     int buttonX=getwindowwidth()/2-80;
     int buttonY=getwindowheight()/2;
-    drawButton("Start",buttonX,buttonY,buttonX+130,buttonY+40,getpixel(buttonX,buttonY));
+    buttons[nButtons]={buttonX,buttonY,buttonX+130,buttonY+40,"Start"};
+    drawButton(nButtons,RGB(3,36,80));
+    nButtons++;
 }
 
 void drawOptions() {
     //readimagefile("bg.bmp",0,0,getwindowwidth(),getwindowheight());
-    setBackgroundColor(RGB(3,36,80));
+    /*setBackgroundColor(RGB(3,36,80));
     int titleX=getwindowwidth()/2-150;
     int titleY=40;
     drawText("OPTIONS",titleX,titleY,WHITE,28);
@@ -88,7 +90,7 @@ void drawOptions() {
     drawButton("NO",700,190,780,230,getpixel(1,1));
     drawButton("NO",700,250,780,290,getpixel(1,1));
     drawButton("NO",700,310,780,350,getpixel(1,1));
-    std::cout<<"Number of buttons: "<<nButtons<<'\n';
+    std::cout<<"Number of buttons: "<<nButtons<<'\n';*/
 }
 
 void drawDot(Point p, int color)
