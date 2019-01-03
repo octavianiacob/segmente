@@ -36,17 +36,18 @@ void drawButton(int buttonIndex, int bgColor, int textSize,int font)
     Button button=buttons[buttonIndex];
     setfillstyle(SOLID_FILL, bgColor);
     bar(button.x1,button.y1,button.x2,button.y2);
+    //std::cout<<button.name<<" ";
     drawText(button.name,button.x1,button.y1,WHITE,textSize,font);
     setcolor(WHITE);
     rectangle(button.x1,button.y1,button.x2,button.y2);
 }
 
-void changeButtonText(int buttonIndex, char text[20])
+void changeButtonText(int buttonIndex, char *text)
 {
-    Button
-    button = buttons[buttonIndex];
-    button.name=text;
-    drawButton(buttonIndex,getpixel(1,1));
+    Button button = buttons[buttonIndex];
+    strcpy(button.name,text);
+    std::cout<<button.name<<" ";
+    drawButton(buttonIndex,GREEN);
 }
 
 void drawScoreboard()
@@ -76,14 +77,15 @@ void drawMenu()
     rectangle(titleX,titleY,titleX+390,titleY+50);
     int buttonX=getwindowwidth()/2-80;
     int buttonY=getwindowheight()/2;
-    buttons[nButtons]= {buttonX,buttonY,buttonX+130,buttonY+40,"Start"};
+    buttons[0]= {buttonX,buttonY,buttonX+130,buttonY+40};
+    strcpy(buttons[0].name,"Start");
     drawButton(nButtons,RGB(3,36,80));
     nButtons++;
 }
 
 void drawOptions()
 {
-    setBackgroundColor(RGB(3,36,80));
+    /*setBackgroundColor(RGB(3,36,80));
     int titleX=getwindowwidth()/2-150;
     int titleY=40;
     drawText("OPTIONS",titleX,titleY,WHITE,28);
@@ -113,7 +115,7 @@ void drawOptions()
     drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    std::cout<<"Number of buttons: "<<nButtons<<'\n';
+    std::cout<<"Number of buttons: "<<nButtons<<'\n';*/
 }
 
 void drawDot(Point p, int color)

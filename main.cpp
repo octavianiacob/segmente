@@ -295,7 +295,7 @@ void showOptionsScreen()
                 std::cout<<"Game started."<<'\n';
                 break;
             }
-            if(isInsideButton(x,y,2)) //Game mode button
+            else if(isInsideButton(x,y,2)) //Game mode button
             {
                 if(gameMode==PvC)
                 {
@@ -377,7 +377,7 @@ void startGame()
 {
     initwindow(960,540);
     showStartScreen();
-    showOptionsScreen();
+    //showOptionsScreen();
     showGameScreen();
     getch();
     closegraph();

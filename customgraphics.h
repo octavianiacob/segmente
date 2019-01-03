@@ -3,7 +3,7 @@
 
 struct Button {
     int x1, y1, x2, y2;
-    char *name;
+    char name[20];
 };
 
 void drawButton(int buttonIndex, int bgColor=RGB(3,36,80), int textSize=16,int font=COMPLEX_FONT);
