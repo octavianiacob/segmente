@@ -17,7 +17,8 @@ void setBackgroundColor(int color)
     bar(0,0,getwindowwidth(),getwindowheight());
 }
 
-void drawGameArea() {
+void drawGameArea()
+{
     setfillstyle(SOLID_FILL,BLACK);
     bar(0,0,0.8*getwindowwidth(),getwindowheight());
 }
@@ -30,7 +31,8 @@ void drawText(char *text, int x, int y, int color=BLACK, int textSize=12,int fon
     outtextxy(x, y, text);
 }
 
-void drawButton(int buttonIndex, int bgColor, int textSize,int font) {
+void drawButton(int buttonIndex, int bgColor, int textSize,int font)
+{
     Button button=buttons[buttonIndex];
     setfillstyle(SOLID_FILL, bgColor);
     bar(button.x1,button.y1,button.x2,button.y2);
@@ -41,10 +43,14 @@ void drawButton(int buttonIndex, int bgColor, int textSize,int font) {
 
 void changeButtonText(int buttonIndex, char text[20])
 {
-    buttons[buttonIndex].name=text;
+    Button
+    button = buttons[buttonIndex];
+    button.name=text;
+    drawButton(buttonIndex,getpixel(1,1));
 }
 
-void drawScoreboard() {
+void drawScoreboard()
+{
     setfillstyle(SOLID_FILL,RGB(250,250,250));
     bar(0.8*getwindowwidth(),0,getwindowwidth(),getwindowheight());
     int exitX=getwindowwidth()-140;
@@ -61,7 +67,8 @@ void drawScoreboard() {
     drawText(player2,player2X,player2Y,GREEN,15);
 }
 
-void drawMenu() {
+void drawMenu()
+{
     readimagefile("bg.bmp",0,0,getwindowwidth(),getwindowheight());
     int titleX=getwindowwidth()/2-200;
     int titleY=getwindowheight()/2-100;
@@ -69,14 +76,14 @@ void drawMenu() {
     rectangle(titleX,titleY,titleX+390,titleY+50);
     int buttonX=getwindowwidth()/2-80;
     int buttonY=getwindowheight()/2;
-    buttons[nButtons]={buttonX,buttonY,buttonX+130,buttonY+40,"Start"};
+    buttons[nButtons]= {buttonX,buttonY,buttonX+130,buttonY+40,"Start"};
     drawButton(nButtons,RGB(3,36,80));
     nButtons++;
 }
 
-void drawOptions() {
-    //readimagefile("bg.bmp",0,0,getwindowwidth(),getwindowheight());
-    /*setBackgroundColor(RGB(3,36,80));
+void drawOptions()
+{
+    setBackgroundColor(RGB(3,36,80));
     int titleX=getwindowwidth()/2-150;
     int titleY=40;
     drawText("OPTIONS",titleX,titleY,WHITE,28);
@@ -85,12 +92,28 @@ void drawOptions() {
     drawText("Timer:",100,190,WHITE,16);
     drawText("Colored Points:",100,250,WHITE,16);
     drawText("Music:",100,310,WHITE,16);
-    drawButton("Play",430,450,540,490,getpixel(430,450)); //nButton1
-    drawButton("PvC",700,130,780,170,getpixel(1,1));
-    drawButton("NO",700,190,780,230,getpixel(1,1));
-    drawButton("NO",700,250,780,290,getpixel(1,1));
-    drawButton("NO",700,310,780,350,getpixel(1,1));
-    std::cout<<"Number of buttons: "<<nButtons<<'\n';*/
+
+    buttons[nButtons]={430,450,540,490,"Play"};
+    drawButton(nButtons,getpixel(1,1)); //nButton1
+    nButtons++;
+
+    buttons[nButtons]={700,130,780,170,"PvC"};
+    drawButton(nButtons,getpixel(1,1));
+    nButtons++;
+
+    buttons[nButtons]={700,190,780,230,"NO"};
+    drawButton(nButtons,getpixel(1,1));
+    nButtons++;
+
+    buttons[nButtons]={700,250,780,290,"NO"};
+    drawButton(nButtons,getpixel(1,1));
+    nButtons++;
+
+    buttons[nButtons]={700,310,780,350,"NO"};
+    drawButton(nButtons,getpixel(1,1));
+    nButtons++;
+
+    std::cout<<"Number of buttons: "<<nButtons<<'\n';
 }
 
 void drawDot(Point p, int color)
@@ -103,7 +126,7 @@ void drawDot(Point p, int color)
 void drawSegment(Point a, Point b, int color,int thickness)
 {
     setcolor(color);
-    for(int i=1;i<=thickness;i++)
+    for(int i=1; i<=thickness; i++)
     {
         line(a.x,a.y,b.x,b.y);
         line(a.x+i-1,a.y,b.x+i-1,b.y);
@@ -111,11 +134,13 @@ void drawSegment(Point a, Point b, int color,int thickness)
     }
 }
 
-bool isInsideButton(int x,int y,int buttonIndex) {
+bool isInsideButton(int x,int y,int buttonIndex)
+{
     Button button=buttons[buttonIndex];
     return x>=button.x1&&x<=button.x2&&y>=button.y1&&y<=button.y2;
 }
 
-bool isInsideDot(Point p,Point c) {
+bool isInsideDot(Point p,Point c)
+{
     return sqrt((p.x-c.x)*(p.x-c.x)+(p.y-c.y)*(p.y-c.y))<=dotRadius;
 }

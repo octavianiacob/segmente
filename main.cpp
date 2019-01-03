@@ -266,9 +266,11 @@ void showStartScreen()
             if(isInsideButton(x,y,0))
                 break;
         }
-        if(ismouseclick(WM_MOUSEMOVE)) {
+        if(ismouseclick(WM_MOUSEMOVE))
+        {
             getmouseclick(WM_MOUSEMOVE,x,y);
-            if(isInsideButton(x,y,0)) {
+            if(isInsideButton(x,y,0))
+            {
                 drawButton(0,RED),hovered=true;
             }
             else if(hovered)
@@ -281,6 +283,7 @@ void showStartScreen()
 void showOptionsScreen()
 {
     drawOptions();
+    bool hovered=false;
     do
     {
         if(ismouseclick(WM_LBUTTONDOWN))
@@ -288,10 +291,10 @@ void showOptionsScreen()
             int x,y;
             getmouseclick(WM_LBUTTONDOWN,x,y);
             if(isInsideButton(x,y,1)) //Play button
-                {
-                    std::cout<<"Game started."<<'\n';
-                    break;
-                }
+            {
+                std::cout<<"Game started."<<'\n';
+                break;
+            }
             if(isInsideButton(x,y,2)) //Game mode button
             {
                 if(gameMode==PvC)
@@ -353,6 +356,18 @@ void showOptionsScreen()
                 }
             }
         }
+        //Hover Animation
+        int x,y;
+        if(ismouseclick(WM_MOUSEMOVE))
+        {
+            getmouseclick(WM_MOUSEMOVE,x,y);
+            if(isInsideButton(x,y,1))
+            {
+                drawButton(1,RED),hovered=true;
+            }
+            else if(hovered)
+                drawButton(1),hovered=false;
+        }
     }
     while(true);
     showGameScreen();
@@ -362,7 +377,7 @@ void startGame()
 {
     initwindow(960,540);
     showStartScreen();
-    //showOptionsScreen();
+    showOptionsScreen();
     showGameScreen();
     getch();
     closegraph();
