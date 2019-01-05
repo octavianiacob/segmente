@@ -57,7 +57,7 @@
 	"algorithms.h"
 	<iostream>
 
-1546706364 source:\\mac\home\documents\github\segmente\main.cpp
+1546707422 source:\\mac\home\documents\github\segmente\main.cpp
 	<iostream>
 	<graphics.h>
 	<winbgim.h>
@@ -71,7 +71,7 @@
 
 1546540266 \\mac\home\documents\github\segmente\customgraphics.h
 
-1546706196 source:\\mac\home\documents\github\segmente\customgraphics.cpp
+1546711774 source:\\mac\home\documents\github\segmente\customgraphics.cpp
 	<graphics.h>
 	<winbgim.h>
 	<iostream>

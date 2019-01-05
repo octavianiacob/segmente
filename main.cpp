@@ -238,9 +238,18 @@ void playLevel()
             turn=PLAYER1;
     }
     if(turn==PLAYER1)
+    {
         player2Score++;
+        if(gameMode=PvC)
+            readimagefile("computerwin.bmp",0,0,getwindowwidth(),210);
+        else
+            readimagefile("p2win.bmp",0,0,getwindowwidth(),210);
+    }
     else
+    {
         player1Score++;
+        readimagefile("p1win.bmp",0,0,getwindowwidth(),210);
+    }
 }
 
 void showGameScreen()
