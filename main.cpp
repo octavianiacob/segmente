@@ -257,7 +257,6 @@ void showGameScreen()
 void showStartScreen()
 {
     drawMenu();
-    bool hovered=false;
     do
     {
         int x,y;
@@ -266,16 +265,6 @@ void showStartScreen()
             getmouseclick(WM_LBUTTONDOWN,x,y);
             if(isInsideButton(x,y,0))
                 break;
-        }
-        if(ismouseclick(WM_MOUSEMOVE))
-        {
-            getmouseclick(WM_MOUSEMOVE,x,y);
-            if(isInsideButton(x,y,0))
-            {
-                drawButton(0,RED),hovered=true;
-            }
-            else if(hovered)
-                drawButton(0),hovered=false;
         }
     }
     while(true);
@@ -301,13 +290,13 @@ void showOptionsScreen()
                 if(gameMode==PvC)
                 {
                     gameMode=PvP;
-                    changeButtonText(2,"PvP");
+                    readimagefile("2p.bmp",608,182,722,217);
                     std::cout<<"Game mode changed to PvP"<<'\n';
                 }
                 else
                 {
                     gameMode=PvC;
-                    changeButtonText(2,"PvC");
+                    readimagefile("1p.bmp",608,182,722,217);
                     std::cout<<"Game mode changed to PvC"<<'\n';
                 }
             }
@@ -316,13 +305,13 @@ void showOptionsScreen()
                 if(timer==NoTimer)
                 {
                     timer=YesTimer;
-                    changeButtonText(3,"YES");
+                    readimagefile("yes.bmp",608,242,722,277);
                     std::cout<<"Timer setting turned ON"<<'\n';
                 }
                 else
                 {
                     timer=NoTimer;
-                    changeButtonText(3,"NO");
+                    readimagefile("no.bmp",608,242,722,277);
                     std::cout<<"Timer setting turned OFF"<<'\n';
                 }
             }
@@ -331,13 +320,13 @@ void showOptionsScreen()
                 if(coloredPoints==NoColoredPoints)
                 {
                     coloredPoints=YesColoredPoints;
-                    changeButtonText(4,"YES");
+                    readimagefile("yes.bmp",608,302,722,337);
                     std::cout<<"ColoredPoints setting turned ON"<<'\n';
                 }
                 else
                 {
                     coloredPoints=NoColoredPoints;
-                    changeButtonText(4,"No");
+                    readimagefile("no.bmp",608,302,722,337);
                     std::cout<<"ColoredPoints setting turned OFF"<<'\n';
                 }
             }
@@ -346,28 +335,16 @@ void showOptionsScreen()
                 if(music==NoMusic)
                 {
                     music=YesMusic;
-                    changeButtonText(5,"YES");
+                    readimagefile("yes.bmp",608,362,722,397);
                     std::cout<<"Music setting turned ON"<<'\n';
                 }
                 else
                 {
                     music=NoMusic;
-                    changeButtonText(5,"No");
+                    readimagefile("no.bmp",608,362,722,397);
                     std::cout<<"Music setting turned OFF"<<'\n';
                 }
             }
-        }
-        //Hover Animation
-        int x,y;
-        if(ismouseclick(WM_MOUSEMOVE))
-        {
-            getmouseclick(WM_MOUSEMOVE,x,y);
-            if(isInsideButton(x,y,1))
-            {
-                drawButton(1,RED),hovered=true;
-            }
-            else if(hovered)
-                drawButton(1),hovered=false;
         }
     }
     while(true);

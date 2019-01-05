@@ -47,7 +47,7 @@ void changeButtonText(int buttonIndex, char *text)
     Button button = buttons[buttonIndex];
     strcpy(button.name,text);
     std::cout<<button.name<<" ";
-    drawButton(buttonIndex,GREEN);
+    //drawButton(buttonIndex,GREEN);
 }
 
 void drawScoreboard()
@@ -70,54 +70,43 @@ void drawScoreboard()
 
 void drawMenu()
 {
-    readimagefile("bgnice.bmp",0,0,getwindowwidth(),getwindowheight());
-    int titleX=getwindowwidth()/2-200;
-    int titleY=getwindowheight()/2-100;
+    readimagefile("bgnou.bmp",0,0,getwindowwidth(),getwindowheight());
     //drawText("SEGMENTE",titleX,titleY,WHITE,28);
     //rectangle(titleX,titleY,titleX+390,titleY+50);
-    int buttonX=getwindowwidth()/2-80;
-    int buttonY=getwindowheight()/2;
-    //buttons[0]= {buttonX,buttonY,buttonX+130,buttonY+40};
-    //strcpy(buttons[0].name,"Start");
+    int buttonX1=410;
+    int buttonY1=260;
+    int buttonX2=557;
+    int buttonY2=307;
+    buttons[0]= {buttonX1,buttonY1,buttonX2,buttonY2};
     //drawButton(nButtons,RGB(3,36,80));
-    //nButtons++;
+    nButtons++;
 }
 
 void drawOptions()
 {
-    setBackgroundColor(RGB(3,36,80));
-    int titleX=getwindowwidth()/2-150;
-    int titleY=40;
-    drawText("OPTIONS",titleX,titleY,WHITE,28);
-    rectangle(titleX,titleY,titleX+310,titleY+50);
-    drawText("Game mode:",100,130,WHITE,16);
-    drawText("Timer:",100,190,WHITE,16);
-    drawText("Colored Points:",100,250,WHITE,16);
-    drawText("Music:",100,310,WHITE,16);
-
-    buttons[nButtons]= {430,450,540,490};
-    strcpy(buttons[1].name,"Play");
-    drawButton(nButtons,getpixel(1,1)); //nButton1
+    readimagefile("optiuni.bmp",0,0,getwindowwidth(),getwindowheight());
+    buttons[nButtons]= {420,437,540,481};
+    //drawButton(nButtons,getpixel(1,1)); //nButton1
     nButtons++;
 
-    buttons[nButtons]= {700,130,780,170};
-    strcpy(buttons[2].name,"PvC");
-    drawButton(nButtons,getpixel(1,1));
+    readimagefile("1p.bmp",608,182,722,217);
+    buttons[nButtons]= {608,182,722,217};
+    //drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    buttons[nButtons]= {700,190,780,230};
-    strcpy(buttons[3].name,"NO");
-    drawButton(nButtons,getpixel(1,1));
+    readimagefile("no.bmp",608,242,722,277);
+    buttons[nButtons]= {608,242,722,277};
+    //drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    buttons[nButtons]= {700,250,780,290};
-    strcpy(buttons[4].name,"NO");
-    drawButton(nButtons,getpixel(1,1));
+    readimagefile("no.bmp",608,302,722,337);
+    buttons[nButtons]= {608,302,722,337};
+    //drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    buttons[nButtons]= {700,310,780,350};
-    strcpy(buttons[5].name,"NO");
-    drawButton(nButtons,getpixel(1,1));
+    readimagefile("no.bmp",608,362,722,397);
+    buttons[nButtons]= {608,362,722,397};
+    //drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
     std::cout<<"Number of buttons: "<<nButtons<<'\n';
