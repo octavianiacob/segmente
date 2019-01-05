@@ -70,22 +70,22 @@ void drawScoreboard()
 
 void drawMenu()
 {
-    readimagefile("bg.bmp",0,0,getwindowwidth(),getwindowheight());
+    readimagefile("bgnice.bmp",0,0,getwindowwidth(),getwindowheight());
     int titleX=getwindowwidth()/2-200;
     int titleY=getwindowheight()/2-100;
-    drawText("SEGMENTE",titleX,titleY,WHITE,28);
-    rectangle(titleX,titleY,titleX+390,titleY+50);
+    //drawText("SEGMENTE",titleX,titleY,WHITE,28);
+    //rectangle(titleX,titleY,titleX+390,titleY+50);
     int buttonX=getwindowwidth()/2-80;
     int buttonY=getwindowheight()/2;
-    buttons[0]= {buttonX,buttonY,buttonX+130,buttonY+40};
-    strcpy(buttons[0].name,"Start");
-    drawButton(nButtons,RGB(3,36,80));
-    nButtons++;
+    //buttons[0]= {buttonX,buttonY,buttonX+130,buttonY+40};
+    //strcpy(buttons[0].name,"Start");
+    //drawButton(nButtons,RGB(3,36,80));
+    //nButtons++;
 }
 
 void drawOptions()
 {
-    /*setBackgroundColor(RGB(3,36,80));
+    setBackgroundColor(RGB(3,36,80));
     int titleX=getwindowwidth()/2-150;
     int titleY=40;
     drawText("OPTIONS",titleX,titleY,WHITE,28);
@@ -95,27 +95,32 @@ void drawOptions()
     drawText("Colored Points:",100,250,WHITE,16);
     drawText("Music:",100,310,WHITE,16);
 
-    buttons[nButtons]={430,450,540,490,"Play"};
+    buttons[nButtons]= {430,450,540,490};
+    strcpy(buttons[1].name,"Play");
     drawButton(nButtons,getpixel(1,1)); //nButton1
     nButtons++;
 
-    buttons[nButtons]={700,130,780,170,"PvC"};
+    buttons[nButtons]= {700,130,780,170};
+    strcpy(buttons[2].name,"PvC");
     drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    buttons[nButtons]={700,190,780,230,"NO"};
+    buttons[nButtons]= {700,190,780,230};
+    strcpy(buttons[3].name,"NO");
     drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    buttons[nButtons]={700,250,780,290,"NO"};
+    buttons[nButtons]= {700,250,780,290};
+    strcpy(buttons[4].name,"NO");
     drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    buttons[nButtons]={700,310,780,350,"NO"};
+    buttons[nButtons]= {700,310,780,350};
+    strcpy(buttons[5].name,"NO");
     drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    std::cout<<"Number of buttons: "<<nButtons<<'\n';*/
+    std::cout<<"Number of buttons: "<<nButtons<<'\n';
 }
 
 void drawDot(Point p, int color)

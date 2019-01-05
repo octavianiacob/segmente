@@ -15,6 +15,7 @@ enum GameMode
 {
     PvP,
     PvC
+
 };
 
 enum Timer
@@ -377,7 +378,7 @@ void startGame()
 {
     initwindow(960,540);
     showStartScreen();
-    //showOptionsScreen();
+    showOptionsScreen();
     showGameScreen();
     getch();
     closegraph();
