@@ -30,4 +30,6 @@ bool isInsideButton(int x,int y,int buttonIndex);
 
 bool isInsideDot(Point p,Point c);
 
+void showNotice();
+
 #endif // CUSTOMGRAPHICS_H_INCLUDED

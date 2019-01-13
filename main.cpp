@@ -70,8 +70,8 @@ void addPoints()
     srand(time(NULL));
     int width=getwindowwidth();
     int height=getwindowheight();
-    for(int i=1; i<=8; i++)
-        for(int j=1; j<=10; j++)
+    for(int i=1; i<=3; i++)
+        for(int j=1; j<=5; j++)
         {
             Point p= {j*70-20,i*60-20};
             p.x+=rand()%30-15;
@@ -179,7 +179,7 @@ void doComputerMove()
 
 void doPlayerMove()
 {
-    int x,y,p1,p2,timer=30;
+    int x,y,p1,p2,timer=30000;
     do
     {
         getmouseclick(WM_LBUTTONDOWN,x,y);
@@ -224,6 +224,8 @@ void updateScores()
 void playLevel()
 {
     drawGameArea();
+    drawScoreboard();
+    updateScores();
     addPoints();
     turn=PLAYER1;
     while(!isGameOver())
@@ -250,6 +252,16 @@ void playLevel()
         player1Score++;
         readimagefile("p1win.bmp",0,0,getwindowwidth(),210);
     }
+    showNotice();
+    if(player1Score+player2Score<3)
+    {
+        playLevel();
+    }
+    else
+    {
+        showNotice();
+    }
+
 }
 
 void showGameScreen()

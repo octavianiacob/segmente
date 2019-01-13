@@ -4,6 +4,7 @@
 #include <math.h>
 #include "algorithms.h"
 #include "customgraphics.h"
+#include <string.h>
 
 Button buttons[10];
 int dotRadius=5,nButtons;
@@ -19,6 +20,7 @@ void setBackgroundColor(int color)
 
 void drawGameArea()
 {
+    clearviewport();
     setfillstyle(SOLID_FILL,BLACK);
     bar(0,0,0.8*getwindowwidth(),getwindowheight());
 }
@@ -140,3 +142,24 @@ bool isInsideDot(Point p,Point c)
 {
     return sqrt((p.x-c.x)*(p.x-c.x)+(p.y-c.y)*(p.y-c.y))<=dotRadius;
 }
+
+void showNotice()
+{
+    buttons[nButtons]= {430,145,542,180};
+    nButtons++;
+    std::cout<<"este "<<nButtons;
+    do
+    {
+        int x,y;
+        if(ismouseclick(WM_LBUTTONDOWN))
+        {
+            getmouseclick(WM_LBUTTONDOWN,x,y);
+            if(isInsideButton(x,y,nButtons-1))
+                {
+                    return;
+                }
+        }
+    }
+    while(true);
+}
+
