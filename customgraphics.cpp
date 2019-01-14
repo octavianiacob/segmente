@@ -48,15 +48,15 @@ void changeButtonText(int buttonIndex, char *text)
 {
     Button button = buttons[buttonIndex];
     strcpy(button.name,text);
-    std::cout<<button.name<<" ";
     //drawButton(buttonIndex,GREEN);
 }
 void drawScoreboard(int mode)
 {
     setfillstyle(SOLID_FILL,RGB(250,250,250));
-    if(mode==1)
+    std::cout<<mode<<" ";
+    if(mode==2)
         readimagefile("scoreboardpvp.bmp",738,0,getwindowwidth(),getwindowheight());
-    if(mode==0)
+    if(mode==1)
         readimagefile("scoreboardpvc.bmp",738,0,getwindowwidth(),getwindowheight());
 }
 

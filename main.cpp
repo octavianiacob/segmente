@@ -263,10 +263,7 @@ void updateScores()
 void playLevel()
 {
     drawGameArea();
-    if(gameMode=PvC)
-    drawScoreboard(0);
-    if(gameMode=PvP)
-    drawScoreboard(1);
+    drawScoreboard(gameMode);
     updateScores();
     addPoints();
     if(coloredPoints)
@@ -309,10 +306,7 @@ void playLevel()
 void showGameScreen()
 {
     clearviewport();
-    if(gameMode = PvC)
-        drawScoreboard(0);
-    if(gameMode = PvP)
-        drawScoreboard(1);
+    drawScoreboard(gameMode);
     for(int i=1; i<=3; i++)
     {
         updateScores();
