@@ -32,4 +32,6 @@ bool isInsideDot(Point p,Point c);
 
 void showNotice();
 
+void updateTimer(int timer);
+
 #endif // CUSTOMGRAPHICS_H_INCLUDED

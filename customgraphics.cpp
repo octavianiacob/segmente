@@ -111,7 +111,6 @@ void drawOptions()
     //drawButton(nButtons,getpixel(1,1));
     nButtons++;
 
-    std::cout<<"Number of buttons: "<<nButtons<<'\n';
 }
 
 void drawDot(Point p, int color)
@@ -147,7 +146,6 @@ void showNotice()
 {
     buttons[nButtons]= {430,145,542,180};
     nButtons++;
-    std::cout<<"este "<<nButtons;
     do
     {
         int x,y;
@@ -163,3 +161,14 @@ void showNotice()
     while(true);
 }
 
+void updateTimer(int timer) {
+
+    char timestr[20];
+    itoa(timer,timestr,10);
+    char pftime[]="00:";
+    if(timer<10)
+        strcat(pftime,"0");
+    strcat(pftime,timestr);
+    std::cout<<pftime<<" ";
+    drawText(pftime,getwindowwidth()-130,getwindowheight()/2+20);
+}

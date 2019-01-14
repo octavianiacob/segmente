@@ -18,31 +18,12 @@ enum GameMode
 
 };
 
-enum Timer
-{
-    YesTimer,
-    NoTimer
-};
-
-enum ColoredPoints
-{
-    YesColoredPoints,
-    NoColoredPoints
-};
-
-enum Music
-{
-    YesMusic,
-    NoMusic
-};
-
 GameMode gameMode=PvC;
-Timer timer=NoTimer;
-ColoredPoints coloredPoints=NoColoredPoints;
-Music music=NoMusic;
-
+bool timer=false,music=false,coloredPoints=false;
 int nPoints,nSegments;
 int turn=PLAYER1,player1Score,player2Score;
+int colors[MAX_POINTS];
+int levelStartTime;
 Segment seg[MAX_POINTS/2];
 
 bool isValidSegment(Segment s)
@@ -64,14 +45,29 @@ bool isGameOver()
     return true;
 }
 
+void recolorPoints() {
+    srand(time(0));
+    for(int i=0;i<nPoints;i++)
+    if(points[i].x) {
+        if(rand()%2==0) {
+            drawDot(points[i],PLAYER1);
+            colors[i]=PLAYER1;
+        }
+        else {
+            drawDot(points[i],PLAYER2);
+            colors[i]=PLAYER2;
+        }
+    }
+}
+
 void addPoints()
 {
     nPoints=0,nSegments=0;
     srand(time(NULL));
     int width=getwindowwidth();
     int height=getwindowheight();
-    for(int i=1; i<=3; i++)
-        for(int j=1; j<=5; j++)
+    for(int i=1; i<=8; i++)
+        for(int j=1; j<=10; j++)
         {
             Point p= {j*70-20,i*60-20};
             p.x+=rand()%30-15;
@@ -105,8 +101,16 @@ bool isBlocked(Point p)
     return true;
 }
 
+bool isValidPoint(int index) {
+    if(coloredPoints&&turn!=colors[index])
+        return false;
+    return points[index].x;
+}
+
 bool isValidNeighbour(int i,int n)
 {
+    if(!isValidPoint(i)||!isValidPoint(i+n))
+        return false;
     if(i+n<0||i+n>=nPoints)
         return false;
     if(points[i+n].x==0)
@@ -133,13 +137,14 @@ int countFreeNeighbours(int pointIndex)
 
 void doComputerMove()
 {
+    turn=PLAYER2;
     bool found=false;
     int point1Index=-1,point2Index=-1;
     int neighbours[]= {-11,-10,-9,-1,1,9,10,11};
     nSegments++;
     for(int i=0; i<nPoints&&!found; i++)
     {
-        if(points[i].x&&countFreeNeighbours(i)<=4&&!isBlocked(points[i]))
+        if(isValidPoint(i)&&!isBlocked(points[i])&&countFreeNeighbours(i)<=4)
         {
             for(int j=0; j<8&&!found; j++)
                 for(int k=j+1; k<8&&!found; k++)
@@ -168,7 +173,7 @@ void doComputerMove()
     {
         for(int i=0; i<nPoints; i++)
             for(int j=i+1; j<nPoints; j++)
-                if(points[i].x&&points[j].x&&isValidSegment({points[i],points[j]}))
+                if(isValidPoint(i)&&isValidPoint(j)&&isValidSegment({points[i],points[j]}))
                     point1Index=i,point2Index=j;
     }
     drawSegment(points[point1Index],points[point2Index],PLAYER2);
@@ -179,26 +184,60 @@ void doComputerMove()
 
 void doPlayerMove()
 {
-    int x,y,p1,p2,timer=30000;
+    int x,y,p1,p2;
+    clock_t startTime=clock(),lastTime=31;
     do
     {
         getmouseclick(WM_LBUTTONDOWN,x,y);
         p1=getPointIndex({x,y});
+        int timeLeft=20-(clock()-startTime)/CLOCKS_PER_SEC;
+        if(timer&&lastTime!=timeLeft)
+            updateTimer(timeLeft);
+
+        if(timer&&timeLeft==0) {
+            updateTimer(30);
+            return;
+        }
+         if(coloredPoints&&lastTime!=timeLeft&&((clock()-levelStartTime)/CLOCKS_PER_SEC)%10==0)
+            recolorPoints();
+        lastTime=timeLeft;
         if(p1<0)
             continue;
-        drawDot(points[p1],turn);
+        if(isValidPoint(p1))
+            drawDot(points[p1],turn);
+        else {
+            p1=-1;
+            continue;
+        }
         do
         {
             getmouseclick(WM_LBUTTONDOWN,x,y);
             p2=getPointIndex({x,y});
-            if(p2==p1)
+            timeLeft=20-(clock()-startTime)/CLOCKS_PER_SEC;
+            if(timer&&timeLeft==0) {
+                drawDot(points[p1],WHITE);
+                updateTimer(30);
+                return;
+            }
+            if(coloredPoints&&((clock()-levelStartTime)/CLOCKS_PER_SEC)%10==0) {
+                recolorPoints();
+                if(!isValidPoint(p1)) {
+                    p1=-1,p2=-1;
+                    break;
+                }
+            }
+            if(timer&&timeLeft!=lastTime)
+                updateTimer(timeLeft);
+            lastTime=timeLeft;
+            if(!coloredPoints&&p2==p1)
             {
                 drawDot(points[p1]);
                 p1=-1;
                 break;
             }
-            if(p2>=0&&isValidSegment({points[p1],points[p2]}))
+            if(p2>=0&&isValidPoint(p2)&&isValidSegment({points[p1],points[p2]}))
             {
+
                 drawSegment(points[p1],points[p2],turn);
                 drawDot(points[p2],turn);
                 addSegmentToArray(p1,p2);
@@ -227,7 +266,12 @@ void playLevel()
     drawScoreboard();
     updateScores();
     addPoints();
+    if(coloredPoints)
+        recolorPoints();
     turn=PLAYER1;
+    if(timer)
+        updateTimer(30);
+    levelStartTime=clock();
     while(!isGameOver())
     {
         if(gameMode==PvC&&turn==PLAYER2)
@@ -254,14 +298,9 @@ void playLevel()
     }
     showNotice();
     if(player1Score+player2Score<3)
-    {
         playLevel();
-    }
     else
-    {
         showNotice();
-    }
-
 }
 
 void showGameScreen()
@@ -301,70 +340,44 @@ void showOptionsScreen()
         {
             int x,y;
             getmouseclick(WM_LBUTTONDOWN,x,y);
-            if(isInsideButton(x,y,1)) //Play button
-            {
-                std::cout<<"Game started."<<'\n';
+            if(isInsideButton(x,y,1))
                 break;
-            }
             else if(isInsideButton(x,y,2)) //Game mode button
             {
                 if(gameMode==PvC)
                 {
                     gameMode=PvP;
                     readimagefile("2p.bmp",608,182,722,217);
-                    std::cout<<"Game mode changed to PvP"<<'\n';
                 }
                 else
                 {
                     gameMode=PvC;
                     readimagefile("1p.bmp",608,182,722,217);
-                    std::cout<<"Game mode changed to PvC"<<'\n';
                 }
             }
             if(isInsideButton(x,y,3)) //Timer Button
             {
-                if(timer==NoTimer)
-                {
-                    timer=YesTimer;
+                timer=!timer;
+                if(timer)
                     readimagefile("yes.bmp",608,242,722,277);
-                    std::cout<<"Timer setting turned ON"<<'\n';
-                }
                 else
-                {
-                    timer=NoTimer;
                     readimagefile("no.bmp",608,242,722,277);
-                    std::cout<<"Timer setting turned OFF"<<'\n';
-                }
             }
             if(isInsideButton(x,y,4)) //Colored Points Button
             {
-                if(coloredPoints==NoColoredPoints)
-                {
-                    coloredPoints=YesColoredPoints;
+                coloredPoints=!coloredPoints;
+                if(coloredPoints)
                     readimagefile("yes.bmp",608,302,722,337);
-                    std::cout<<"ColoredPoints setting turned ON"<<'\n';
-                }
                 else
-                {
-                    coloredPoints=NoColoredPoints;
                     readimagefile("no.bmp",608,302,722,337);
-                    std::cout<<"ColoredPoints setting turned OFF"<<'\n';
-                }
             }
             if(isInsideButton(x,y,5)) //Music Button
             {
-                if(music==NoMusic)
-                {
-                    music=YesMusic;
+                music=!music;
+                if(music)
                     readimagefile("yes.bmp",608,362,722,397);
-                    std::cout<<"Music setting turned ON"<<'\n';
-                }
                 else
-                {
-                    music=NoMusic;
                     readimagefile("no.bmp",608,362,722,397);
-                    std::cout<<"Music setting turned OFF"<<'\n';
-                }
             }
         }
     }
