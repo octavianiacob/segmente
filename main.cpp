@@ -13,8 +13,8 @@ Point points[MAX_POINTS];
 
 enum GameMode
 {
-    PvP,
-    PvC
+    PvP=2,
+    PvC=1
 
 };
 
@@ -263,7 +263,10 @@ void updateScores()
 void playLevel()
 {
     drawGameArea();
-    drawScoreboard();
+    if(gameMode=PvC)
+    drawScoreboard(0);
+    if(gameMode=PvP)
+    drawScoreboard(1);
     updateScores();
     addPoints();
     if(coloredPoints)
@@ -306,7 +309,10 @@ void playLevel()
 void showGameScreen()
 {
     clearviewport();
-    drawScoreboard();
+    if(gameMode = PvC)
+        drawScoreboard(0);
+    if(gameMode = PvP)
+        drawScoreboard(1);
     for(int i=1; i<=3; i++)
     {
         updateScores();

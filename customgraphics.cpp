@@ -51,23 +51,13 @@ void changeButtonText(int buttonIndex, char *text)
     std::cout<<button.name<<" ";
     //drawButton(buttonIndex,GREEN);
 }
-
-void drawScoreboard()
+void drawScoreboard(int mode)
 {
     setfillstyle(SOLID_FILL,RGB(250,250,250));
-    bar(0.8*getwindowwidth(),0,getwindowwidth(),getwindowheight());
-    int exitX=getwindowwidth()-140;
-    int exitY=getwindowheight()-70;
-    int scoreX=exitX-10;
-    int scoreY=exitY-450;
-    int player1X=scoreX-20;
-    int player1Y=scoreY+150;
-    int player2X=scoreX-20;
-    int player2Y=scoreY+300;
-    //drawButton("Exit",exitX,exitY,BLUE,15,COMPLEX_FONT); //nButton 11
-    drawText("Score",scoreX,scoreY,BLACK,15);
-    drawText(player1,player1X,player1Y,BLUE,15);
-    drawText(player2,player2X,player2Y,GREEN,15);
+    if(mode==1)
+        readimagefile("scoreboardpvp.bmp",738,0,getwindowwidth(),getwindowheight());
+    if(mode==0)
+        readimagefile("scoreboardpvc.bmp",738,0,getwindowwidth(),getwindowheight());
 }
 
 void drawMenu()
@@ -165,10 +155,10 @@ void updateTimer(int timer) {
 
     char timestr[20];
     itoa(timer,timestr,10);
-    char pftime[]="00:";
+    char pftime[10]="00:";
     if(timer<10)
         strcat(pftime,"0");
     strcat(pftime,timestr);
     std::cout<<pftime<<" ";
-    drawText(pftime,getwindowwidth()-130,getwindowheight()/2+20);
+    drawText(pftime,getwindowwidth()-150,480,WHITE,14);
 }
