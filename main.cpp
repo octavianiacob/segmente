@@ -45,19 +45,23 @@ bool isGameOver()
     return true;
 }
 
-void recolorPoints() {
+void recolorPoints()
+{
     srand(time(0));
-    for(int i=0;i<nPoints;i++)
-    if(points[i].x) {
-        if(rand()%2==0) {
-            drawDot(points[i],PLAYER1);
-            colors[i]=PLAYER1;
+    for(int i=0; i<nPoints; i++)
+        if(points[i].x)
+        {
+            if(rand()%2==0)
+            {
+                drawDot(points[i],PLAYER1);
+                colors[i]=PLAYER1;
+            }
+            else
+            {
+                drawDot(points[i],PLAYER2);
+                colors[i]=PLAYER2;
+            }
         }
-        else {
-            drawDot(points[i],PLAYER2);
-            colors[i]=PLAYER2;
-        }
-    }
 }
 
 void addPoints()
@@ -66,8 +70,8 @@ void addPoints()
     srand(time(NULL));
     int width=getwindowwidth();
     int height=getwindowheight();
-    for(int i=1; i<=8; i++)
-        for(int j=1; j<=10; j++)
+    for(int i=1; i<=3; i++)
+        for(int j=1; j<=2; j++)
         {
             Point p= {j*70-20,i*60-20};
             p.x+=rand()%30-15;
@@ -101,7 +105,8 @@ bool isBlocked(Point p)
     return true;
 }
 
-bool isValidPoint(int index) {
+bool isValidPoint(int index)
+{
     if(coloredPoints&&turn!=colors[index])
         return false;
     return points[index].x;
@@ -194,18 +199,20 @@ void doPlayerMove()
         if(timer&&lastTime!=timeLeft)
             updateTimer(timeLeft);
 
-        if(timer&&timeLeft==0) {
+        if(timer&&timeLeft==0)
+        {
             updateTimer(30);
             return;
         }
-         if(coloredPoints&&lastTime!=timeLeft&&((clock()-levelStartTime)/CLOCKS_PER_SEC)%10==0)
+        if(coloredPoints&&lastTime!=timeLeft&&((clock()-levelStartTime)/CLOCKS_PER_SEC)%10==0)
             recolorPoints();
         lastTime=timeLeft;
         if(p1<0)
             continue;
         if(isValidPoint(p1))
             drawDot(points[p1],turn);
-        else {
+        else
+        {
             p1=-1;
             continue;
         }
@@ -214,14 +221,17 @@ void doPlayerMove()
             getmouseclick(WM_LBUTTONDOWN,x,y);
             p2=getPointIndex({x,y});
             timeLeft=20-(clock()-startTime)/CLOCKS_PER_SEC;
-            if(timer&&timeLeft==0) {
+            if(timer&&timeLeft==0)
+            {
                 drawDot(points[p1],WHITE);
                 updateTimer(30);
                 return;
             }
-            if(coloredPoints&&((clock()-levelStartTime)/CLOCKS_PER_SEC)%10==0) {
+            if(coloredPoints&&((clock()-levelStartTime)/CLOCKS_PER_SEC)%10==0)
+            {
                 recolorPoints();
-                if(!isValidPoint(p1)) {
+                if(!isValidPoint(p1))
+                {
                     p1=-1,p2=-1;
                     break;
                 }
@@ -256,14 +266,47 @@ void updateScores()
     itoa(player1Score,score1,10);
     itoa(player2Score,score2,10);
     setfillstyle(SOLID_FILL,RGB(250,250,250));
-    drawText(score1,850,250,BLACK,12,GOTHIC_FONT);
-    drawText(score2,850,400,BLACK,12,GOTHIC_FONT);
+    if(player1Score==1)
+        readimagefile("star.bmp",805,217,835,247);
+    if(player2Score==1)
+        readimagefile("star.bmp",805,332,835,362);
+
+    if(player1Score==2)
+    {
+        readimagefile("star.bmp",805,217,835,247);
+        readimagefile("star.bmp",835,217,865,247);
+    }
+    if(player2Score==2)
+    {
+        readimagefile("star.bmp",805,332,835,362);
+        readimagefile("star.bmp",835,332,865,362);
+    }
+
+    if(player1Score==3)
+    {
+        readimagefile("star.bmp",805,217,835,247);
+        readimagefile("star.bmp",835,217,865,247);
+        readimagefile("star.bmp",865,217,895,247);
+    }
+    if(player2Score==3)
+    {
+        readimagefile("star.bmp",805,332,835,362);
+        readimagefile("star.bmp",835,332,865,362);
+        readimagefile("star.bmp",865,332,895,362);
+    }
+    //drawText(score1,850,250,BLACK,12,GOTHIC_FONT);
+    //drawText(score2,850,400,BLACK,12,GOTHIC_FONT);
 }
 
 void playLevel()
 {
     drawGameArea();
-    drawScoreboard(gameMode);
+    drawScoreboard(gameMode, timer);
+    if(gameMode==PvP)
+    {
+        setcolor(RGB(0,255,255));
+        line(770,215,930,215);
+    }
     updateScores();
     addPoints();
     if(coloredPoints)
@@ -279,14 +322,33 @@ void playLevel()
         else
             doPlayerMove();
         if(turn==PLAYER1)
+        {
             turn=PLAYER2;
+            if(gameMode==PvP)
+            {
+                setcolor(YELLOW);
+                line(770,330,930,330);
+                setcolor(BLACK);
+                line(770,215,930,215);
+            }
+        }
         else
+        {
             turn=PLAYER1;
+            if(gameMode==PvP)
+            {
+                setcolor(RGB(0,255,255));
+                line(770,215,930,215);
+                setcolor(BLACK);
+                line(770,330,930,330);
+            }
+        }
+
     }
     if(turn==PLAYER1)
     {
         player2Score++;
-        if(gameMode=PvC)
+        if(gameMode==PvC)
             readimagefile("computerwin.bmp",0,0,getwindowwidth(),210);
         else
             readimagefile("p2win.bmp",0,0,getwindowwidth(),210);
@@ -306,7 +368,7 @@ void playLevel()
 void showGameScreen()
 {
     clearviewport();
-    drawScoreboard(gameMode);
+    drawScoreboard(gameMode, timer);
     for(int i=1; i<=3; i++)
     {
         updateScores();

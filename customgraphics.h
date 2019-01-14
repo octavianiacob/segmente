@@ -12,7 +12,7 @@ void changeButtonText(int buttonIndex, char text[20]);
 
 void drawGameArea();
 
-void drawScoreboard(int mode);
+void drawScoreboard(int mode, bool timer);
 
 void drawText(char *text, int x, int y, int color, int font, int textSize);
 

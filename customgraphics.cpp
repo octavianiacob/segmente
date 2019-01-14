@@ -50,14 +50,18 @@ void changeButtonText(int buttonIndex, char *text)
     strcpy(button.name,text);
     //drawButton(buttonIndex,GREEN);
 }
-void drawScoreboard(int mode)
+void drawScoreboard(int mode, bool timer)
 {
     setfillstyle(SOLID_FILL,RGB(250,250,250));
     std::cout<<mode<<" ";
-    if(mode==2)
+    if(mode==2 && timer==true)
         readimagefile("scoreboardpvp.bmp",738,0,getwindowwidth(),getwindowheight());
-    if(mode==1)
+    if(mode==2 && timer==false)
+        readimagefile("scoreboardpvpnotimer.bmp",738,0,getwindowwidth(),getwindowheight());
+    if(mode==1 && timer==true)
         readimagefile("scoreboardpvc.bmp",738,0,getwindowwidth(),getwindowheight());
+    if(mode==1 && timer==false)
+        readimagefile("scoreboardpvcnotimer.bmp",738,0,getwindowwidth(),getwindowheight());
 }
 
 void drawMenu()
@@ -160,5 +164,5 @@ void updateTimer(int timer) {
         strcat(pftime,"0");
     strcat(pftime,timestr);
     std::cout<<pftime<<" ";
-    drawText(pftime,getwindowwidth()-150,480,WHITE,14);
+    drawText(pftime,800,470,WHITE,15);
 }
