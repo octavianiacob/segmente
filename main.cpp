@@ -30,10 +30,15 @@ Segment seg[MAX_POINTS/2];
 
 bool isValidSegment(Segment s)
 {
+    if(coloredPoints&&getpixel(s.a.x,s.a.y)!=getpixel(s.b.x,s.b.y))
+        return false;
     if(s.a.x==s.b.x&&s.a.y==s.b.y)
         return false;
     for(int i=0; i<nSegments; i++)
         if(doIntersect(s, seg[i]))
+            return false;
+    for(int i=0;i<nPoints;i++)
+        if(((s.a.x!=points[i].x||s.a.y!=points[i].y)&&(s.b.x!=points[i].x||s.b.y!=points[i].y))&&isCollinear(s.a,s.b,points[i]))
             return false;
     return true;
 }
@@ -72,15 +77,15 @@ void addPoints()
     srand(time(NULL));
     int width=getwindowwidth();
     int height=getwindowheight();
-    for(int i=1; i<=3; i++)
-        for(int j=1; j<=2; j++)
-        {
-            Point p= {j*70-20,i*60-20};
-            p.x+=rand()%30-15;
-            p.y+=rand()%30-15;
-            points[nPoints++]=p;
-            drawDot(p);
-        }
+    for(int i=1; i<=8; i++)
+    for(int j=1; j<=10; j++)
+    {
+        Point p= {j*70-20,i*60-20};
+        p.x+=rand()%30-15;
+        p.y+=rand()%30-15;
+        points[nPoints++]=p;
+        drawDot(p);
+    }
 }
 
 int getPointIndex(Point p)
@@ -268,36 +273,20 @@ void updateScores()
     itoa(player1Score,score1,10);
     itoa(player2Score,score2,10);
     setfillstyle(SOLID_FILL,RGB(250,250,250));
-    if(player1Score==1)
+    if(player1Score>=1)
         readimagefile("star.bmp",805,217,835,247);
-    if(player2Score==1)
+    if(player2Score>=1)
         readimagefile("star.bmp",805,332,835,362);
 
-    if(player1Score==2)
-    {
-        readimagefile("star.bmp",805,217,835,247);
+    if(player1Score>=2)
         readimagefile("star.bmp",835,217,865,247);
-    }
-    if(player2Score==2)
-    {
-        readimagefile("star.bmp",805,332,835,362);
+    if(player2Score>=2)
         readimagefile("star.bmp",835,332,865,362);
-    }
 
-    if(player1Score==3)
-    {
-        readimagefile("star.bmp",805,217,835,247);
-        readimagefile("star.bmp",835,217,865,247);
+    if(player1Score>=3)
         readimagefile("star.bmp",865,217,895,247);
-    }
-    if(player2Score==3)
-    {
-        readimagefile("star.bmp",805,332,835,362);
-        readimagefile("star.bmp",835,332,865,362);
+    if(player2Score>=3)
         readimagefile("star.bmp",865,332,895,362);
-    }
-    //drawText(score1,850,250,BLACK,12,GOTHIC_FONT);
-    //drawText(score2,850,400,BLACK,12,GOTHIC_FONT);
 }
 
 void playLevel()
@@ -318,9 +307,7 @@ void playLevel()
         updateTimer(30);
     levelStartTime=clock();
     if(music)
-    {
         PlaySound("soundtrack.wav", NULL, SND_ASYNC);
-    }
     while(!isGameOver())
     {
         if(gameMode==PvC&&turn==PLAYER2)

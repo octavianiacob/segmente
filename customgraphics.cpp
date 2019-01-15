@@ -48,12 +48,10 @@ void changeButtonText(int buttonIndex, char *text)
 {
     Button button = buttons[buttonIndex];
     strcpy(button.name,text);
-    //drawButton(buttonIndex,GREEN);
 }
 void drawScoreboard(int mode, bool timer)
 {
     setfillstyle(SOLID_FILL,RGB(250,250,250));
-    std::cout<<mode<<" ";
     if(mode==2 && timer==true)
         readimagefile("scoreboardpvp.bmp",738,0,getwindowwidth(),getwindowheight());
     if(mode==2 && timer==false)
@@ -147,9 +145,7 @@ void showNotice()
         {
             getmouseclick(WM_LBUTTONDOWN,x,y);
             if(isInsideButton(x,y,nButtons-1))
-                {
-                    return;
-                }
+                return;
         }
     }
     while(true);
@@ -163,6 +159,5 @@ void updateTimer(int timer) {
     if(timer<10)
         strcat(pftime,"0");
     strcat(pftime,timestr);
-    std::cout<<pftime<<" ";
     drawText(pftime,800,470,WHITE,15);
 }
