@@ -6,6 +6,8 @@
 #include <time.h>
 #include "algorithms.h"
 #include "customgraphics.h"
+#include <Windows.h>
+#include <MMSystem.h>
 #define MAX_POINTS 100
 #define PLAYER1 RGB(0,255,255)
 #define PLAYER2 YELLOW
@@ -315,6 +317,10 @@ void playLevel()
     if(timer)
         updateTimer(30);
     levelStartTime=clock();
+    if(music)
+    {
+        PlaySound("soundtrack.wav", NULL, SND_ASYNC);
+    }
     while(!isGameOver())
     {
         if(gameMode==PvC&&turn==PLAYER2)
